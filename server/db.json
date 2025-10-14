@@ -1,14 +1,49 @@
 {
   "products": [
-    { "id": 1, "name": "Кофта", "price": 5000, "image": "https://via.placeholder.com/150?text=Кофта" },
-    { "id": 2, "name": "Штаны", "price": 7000, "image": "https://via.placeholder.com/150?text=Штаны" },
-    { "id": 3, "name": "Кроссовки", "price": 12000, "image": "https://via.placeholder.com/150?text=Кроссовки" },
-    { "id": 4, "name": "Футболка", "price": 3000, "image": "https://via.placeholder.com/150?text=Футболка" },
-    { "id": 5, "name": "Платье", "price": 9000, "image": "https://via.placeholder.com/150?text=Платье" },
-    { "id": 6, "name": "Сумка", "price": 6000, "image": "https://via.placeholder.com/150?text=Сумка" },
-    { "id": 7, "name": "Шляпа", "price": 2500, "image": "https://via.placeholder.com/150?text=Шляпа" },
-    { "id": 8, "name": "Очки", "price": 4000, "image": "https://via.placeholder.com/150?text=Очки" }
+    { "id": 101, "name": "Свитер", "price": 5000, "silePrise": 25, "image": "/images/top.jpeg", "categoryIds": [1, 4, 5],
+      "addedAt": "2025-10-09", "sizes": ["L"], "isHot": false},
+    { "id": 102, "name": "Брюки", "price": 7000, "silePrise": 15, "image": "./images/trousers.png", "categoryIds": [1, 4, 6],
+      "addedAt": "2025-10-10", "sizes": ["M", "L"], "isHot": true },
+    { "id": 103, "name": "Туфли", "price": 12000, "silePrise": 10, "image": "./images/shoes.jpg", "categoryIds": [2, 8, 9],
+      "addedAt": "2025-10-09", "sizes": [39, 40], "isHot": true},
+    { "id": 104, "name": "Свитер", "price": 3000, "silePrise": 25, "image": "./images/sweater.png", "categoryIds": [1, 4, 5],
+      "addedAt": "2025-10-12", "sizes": ["M", "L"], "isHot": false},
+    { "id": 105, "name": "Платье", "price": 9000, "silePrise": 20, "image": "./images/dress.jpg", "categoryIds": [1, 4, 7],
+      "addedAt": "2025-10-09", "sizes": ["S"], "isHot": true},
+    { "id": 106, "name": "Сумка", "price": 6000, "silePrise": 30, "image": "./images/bag.jpg", "categoryIds": [3],
+      "addedAt": "2025-10-20", "isHot": true},
+    { "id": 107, "name": "Свитер", "price": 2500, "image": "./images/sweater.png", "categoryIds": [1, 4, 5],
+      "addedAt": "2025-12-11", "sizes": ["S", "M", "L"], "isHot": false},
+    { "id": 108, "name": "Свитер", "price": 4000, "image": "./images/sweater.png", "categoryIds": [1, 4, 5],
+      "addedAt": "2025-10-01", "sizes": ["S", "M", "L"], "isHot": false},
+    { "id": 109, "name": "Брюки", "price": 4000, "image": "./images/trousers.png", "categoryIds": [1, 4, 6],
+      "addedAt": "2025-11-08", "sizes": ["S", "M", "L"], "isHot": true},
+    { "id": 110, "name": "Свитер", "price": 9000, "image": "./images/sweater.png", "categoryIds": [1, 4, 5],
+      "addedAt": "2025-10-23", "sizes": ["S", "M", "L"], "isHot": false},
+    { "id": 111, "name": "Свитер", "price": 4000, "image": "./images/sweater.png", "categoryIds": [1, 4, 5] },
+    { "id": 112, "name": "Платье", "price": 4000, "image": "./images/dress.jpg", "categoryIds": [1, 4, 7],
+      "addedAt": "2025-11-22", "sizes": ["S", "M", "L"], "isHot": true},
+    { "id": 113, "name": "Брюки", "price": 2500, "image": "./images/trousers.png", "categoryIds": [1, 4, 6],
+      "addedAt": "2025-10-02", "sizes": ["S", "L"], "isHot": false},
+    { "id": 114, "name": "Платье", "price": 4000, "image": "./images/dress.jpg", "categoryIds": [1, 4, 7],
+      "addedAt": "2025-10-01", "sizes": ["S", "M", "L"], "isHot": false},
+    { "id": 115, "name": "Туфли", "price": 9000, "image": "./images/shoes.jpg", "categoryIds": [2, 8, 9],
+      "addedAt": "2025-10-01", "sizes": [36, 37, 38, 39, 40], "isHot": true}
+  ],
+  "categories": [
+    { "id": 1, "name": "Одежда", "parentId": null },
+    { "id": 2, "name": "Обувь", "parentId": null },
+    { "id": 3, "name": "Сумки", "parentId": null },
+
+    { "id": 4, "name": "Вся одежда", "parentId": 1 },
+    { "id": 5, "name": "Свитер", "parentId": 1 },
+    { "id": 6, "name": "Брюки", "parentId": 1 },
+    { "id": 7, "name": "Платья", "parentId": 1 },
+
+    { "id": 8, "name": "Вся обувь", "parentId": 2 },
+    { "id": 9, "name": "Туфли", "parentId": 2 }
   ],
   "cart": [],
+  "favorite": [],
   "orders": []
 }
