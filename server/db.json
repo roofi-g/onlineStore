@@ -30,7 +30,7 @@
     { "id": 115, "name": "Туфли", "price": 9000, "image": "./images/shoes.jpg", "categoryIds": [2, 8, 9],
       "addedAt": "2025-10-01", "sizes": [36, 37, 38, 39, 40], "isHot": true}
   ],
-  "categories": [
+  "catalog": [
     { "id": 1, "name": "Одежда", "parentId": null },
     { "id": 2, "name": "Обувь", "parentId": null },
     { "id": 3, "name": "Сумки", "parentId": null },

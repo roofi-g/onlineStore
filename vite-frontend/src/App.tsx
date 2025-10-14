@@ -7,8 +7,8 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Favorite from "./pages/Favorite";
 import Account from "./pages/Account";
-import ProductsList from "./pages/ProductsList";
 import ProductDetail from "./pages/ProductDetail";
+import CatalogPage from "./pages/CatalogPage";
 
 function App() {
   return (
@@ -19,8 +19,9 @@ function App() {
                   <Route exact path={ROUTES.cart} element={<Cart />}/>
                   <Route exact path={ROUTES.favorite} element={<Favorite />}/>
                   <Route exact path={ROUTES.account} element={<Account />}/>
-                  <Route exact path={ROUTES.products} element={<ProductsList />}/>
+                  {/*<Route exact path={ROUTES.products} element={<CategoryPage />}/>*/}
                   <Route exact path="/products/:id" element={<ProductDetail />}/>
+                  <Route exact path="/catalog/:id" element={<CatalogPage />}/>
               </Routes>
           </BrowserRouter>
       </Provider>

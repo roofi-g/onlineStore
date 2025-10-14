@@ -5,4 +5,5 @@ export const ROUTES = {
     account: "/account",
     products: "/products",
     productDetail: (id) => `/products/${id}`,
+    catalog: (id) => `/catalog/${id}`,
 }
