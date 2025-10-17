@@ -1,9 +1,9 @@
 export const ROUTES = {
     home: "/",
     cart: "/cart",
-    favorite: "/favorite",
+    wishlists: "/wishlists",
     account: "/account",
     products: "/products",
     productDetail: (id) => `/products/${id}`,
-    catalog: (id) => `/catalog/${id}`,
+    catalog: (category) => `/catalog/${category}`,
 }
