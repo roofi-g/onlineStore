@@ -1,18 +1,19 @@
-import {Link, useParams} from "react-router-dom";
-import {useGetCatalogQuery, useGetProductsQuery} from "../products/productsApi";
+import { Link } from "react-router-dom";
+import { useActiveCategory } from "../useActiveCategory";
 
 export default function BreadCrumbs() {
-    const { categorySlug, subCategorySlug } = useParams();
-    const { data: catalog = [] } = useGetCatalogQuery();
+    const { parentCategory, childCategory } = useActiveCategory();
+
+    const crumbs = [
+        {name: 'Главная', path: '/'},
+        {name: parentCategory?.name, path: `/catalog/${parentCategory?.slug}`},
+        childCategory && {name: childCategory.name, path: `/catalog/${parentCategory.slug}/${childCategory.slug}`}
+    ].filter(Boolean);
 
     return (
         <nav className="flex">
-            <Link to={'/'} >Главная</Link>
-            {catalog.map(el => (
-                <div key={el.id} className="flex">
-                    <Link to={`/catalog/${categorySlug}`}>{el.slug === categorySlug && el.name}</Link>
-                    <Link to={`/catalog/${categorySlug}/${subCategorySlug}`}>{el.slug === subCategorySlug && el.name }</Link>
-                </div>
+            {crumbs.map((crumb, i) => (
+                <Link key={i} to={crumb.path}>{crumb.name}</Link>
             ))}
         </nav>
     )
