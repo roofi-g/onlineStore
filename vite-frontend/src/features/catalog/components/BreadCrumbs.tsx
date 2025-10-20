@@ -1,5 +1,5 @@
 import {Link, useParams} from "react-router-dom";
-import {useGetCatalogQuery, useGetProductsQuery} from "../../features/products/productsApi";
+import {useGetCatalogQuery, useGetProductsQuery} from "../products/productsApi";
 
 export default function BreadCrumbs() {
     const { categorySlug, subCategorySlug } = useParams();
