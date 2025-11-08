@@ -104,7 +104,7 @@ npm run build       # Сборка проекта
 
   Пример:
   ```bash
-   git commit -m 'feat: '
+   git commit -m 'feat: a hook for sorting products'
    ```
 
 ## Автор
