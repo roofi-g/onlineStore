@@ -22,7 +22,7 @@
 
 ### 1. Клонировать репозиторий
    ```bash
-    git clone
+    git clone https://github.com/roofi-g/onlineStore.git
     cd vite-frontend
    ```
 ### 2. Установить зависимости
