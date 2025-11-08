@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useGetCatalogQuery } from "../products/productsApi";
+import { useGetCatalogQuery } from "../../products/productsApi";
 
 export function useActiveCategory() {
     const { categorySlug, subCategorySlug } = useParams();

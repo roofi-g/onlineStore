@@ -1,7 +1,12 @@
-import {useMemo} from "react";
+import {useGetProductsQuery} from "../../products/productsApi";
+import {useActiveCategory} from "./useActiveCategory";
 import type { Product } from '@/types';
+import {useMemo} from "react";
 
-export const useCategoryFilter = ( products, activeCategory ): Product[] => {
+export const useCategoryFilter = (): Product[] => {
+    const {data: products = []} = useGetProductsQuery();
+    const {activeCategory} = useActiveCategory();
+
     return useMemo(() => {
         if (!products?.length || !activeCategory?.id) return [];
 
