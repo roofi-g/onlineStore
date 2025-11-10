@@ -1,13 +1,7 @@
-import {useCategoryFilter} from "../hooks/useCategoryFilter";
-import {sortSizes} from "../utils/sortSizes";
+import useSortSizes from "../hooks/useSortSizes";
 
 export default function SortSizes({ selected, onChange }) {
-    const productsByCategory = useCategoryFilter();
-
-    const allSizes = productsByCategory.flatMap(el => el.sizes);
-    const uniqueSizes = [...new Set(allSizes)];
-
-    const listSizes = sortSizes(uniqueSizes);
+    const listSizes = useSortSizes();
 
     function selectSizes(size) {
         const select = selected.includes(size)
