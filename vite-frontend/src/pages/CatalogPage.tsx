@@ -1,59 +1,61 @@
-import { useGetProductsQuery } from "../features/products/productsApi";
-import { useCategoryFilter } from "../features/catalog/useCategoryFilter";
-import { useActiveCategory } from "../features/catalog/useActiveCategory";
-import {useEffect, useState} from "react";
-import Check from "../assets/icons/check.svg";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import Filter from "../features/catalog/filter/Filter";
+import Sort from "../features/catalog/sort/Sort";
+import { useCategoryFilter } from "../features/catalog/hooks/useCategoryFilter";
+import { useFilterProducts } from "../features/catalog/hooks/useFilterProducts";
+import { priceMinMax } from "../features/catalog/utils/priceMinMax";
+import { sortProducts } from "../features/catalog/hooks/useSortProducts";
+import ProductsList from "../features/products/ProductsList";
 
-export default function CatalogPage() {
-    const { activeCategory } = useActiveCategory();
-    const { data: products = [] } = useGetProductsQuery();
-    const [showSortMenu, setShowSortMenu] = useState(false);
-    const categoryFilter = useCategoryFilter(products, activeCategory);
-    const [sortedList, setSortedList] = useState([]);
+export default function CatalogPage(factory: () => T, deps: React.DependencyList) {
+	const productsByCategory = useCategoryFilter();
+	const {minPrice, maxPrice} = priceMinMax(productsByCategory);
 
-    useEffect(() => {
-        sortProducts('hot');
-    }, [categoryFilter])
+	const [appliedSort, setAppliedSort] = useState('hot');
+	const [displayed, setDisplayed] = useState(productsByCategory);
+	const [isFiltered, setIsFiltered] = useState(false);
+	const [filters, setFilters] = useState({
+		sizes: [],
+		price: [0, 0],
+	})
 
-    const sortFunc = {
-        hot: (a, b) => Number(b.isHot) - Number(a.isHot),
-        new: (a, b) => new Date(b.create_at) - new Date(a.create_at),
-        priseUp: (a, b) => b.price - a.price,
-        priseDown: (a, b) => a.price - b.price,
-    }
+	const filteredProducts = useFilterProducts(productsByCategory, filters);
 
-    const sortProducts = (type) => {
-        const sort = [...categoryFilter].sort(sortFunc[type]);
-        setSortedList(sort);
-    }
+	useEffect(() => {
+		if (!isFiltered)
+			setDisplayed(sortProducts(productsByCategory, appliedSort));
+	}, [productsByCategory, isFiltered]);
 
-    return (
-        <div>
-            <div className="flex justify-between mt-5 mb-5">
-                <p>Фильтры</p>
-                <p>{categoryFilter.length} товаров</p>
-                <div className="relative">
-                    <button onClick={() => setShowSortMenu(!showSortMenu)}>Сортировка</button>
-                    <ul className={`${showSortMenu ? "block" : "hidden"} absolute bg-white w-50 p-4 right-0`}>
-                        <li><button onClick={() => sortProducts('hot')}>По популярности</button></li>
-                        <li><button onClick={() => sortProducts('new')}>По новизне</button></li>
-                        <li><button onClick={() => sortProducts('priseUp')}>Цена по возрастанию</button></li>
-                        <li><button onClick={() => sortProducts('priseDown')}>Цена по убыванию</button></li>
-                    </ul>
-                </div>
-            </div>
+	const handleFilterChange = newFilters => {
+		setFilters(prev => ({...prev, ...newFilters}))
+	};
 
-            <div className="flex flex-wrap justify-between">
-                {sortedList
-                    .map(el =>
-                        <div key={el.id}>
-                            <img className="w-80" src={el.image} alt=""/>
-                            <p>{el.name} {el.id}</p>
-                            <p>{el.price}</p>
-                        </div>
-                    )
-                }
-            </div>
-        </div>
-    )
+	const handleApplyFilters = () => {
+		const sorted = sortProducts(filteredProducts, appliedSort)
+		setDisplayed(sorted);
+		setIsFiltered(true);
+	}
+
+	const handleApplySort = (type) => {
+		setAppliedSort(type);
+		setDisplayed(sortProducts(displayed, type));
+	}
+
+	return (
+		<div>
+			<div className="flex justify-between mt-5 mb-5">
+				<Filter
+					minPrice={minPrice}
+					maxPrice={maxPrice}
+					onChange={handleFilterChange}
+					productsLength={filteredProducts.length}
+					onApply={handleApplyFilters}
+				/>
+				<p>{displayed.length} товаров</p>
+				<Sort appliedSort={appliedSort} handleApplySort={handleApplySort}/>
+			</div>
+			<ProductsList displayed={displayed}/>
+		</div>
+	)
 }
