@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useActiveCategory } from "../useActiveCategory";
+import {useActiveCategory} from "../hooks/useActiveCategory";
 
 export default function BreadCrumbs() {
     const { parentCategory, childCategory } = useActiveCategory();
