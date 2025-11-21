@@ -1,9 +1,6 @@
-import Header from "../components/header/Header";
-
-export default function Account() {
+export default function AccountPage() {
     return (
         <>
-            <Header/>
             <h1>Account</h1>
         </>
     )
