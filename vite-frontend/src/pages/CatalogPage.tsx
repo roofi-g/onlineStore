@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import Filter from "../features/catalog/filter/Filter";
 import Sort from "../features/catalog/sort/Sort";
-import { useCategoryFilter } from "../features/catalog/hooks/useCategoryFilter";
+import { useProductsByCategory } from "../features/catalog/hooks/useProductsByCategory";
 import { useFilterProducts } from "../features/catalog/hooks/useFilterProducts";
-import { priceMinMax } from "../features/catalog/utils/priceMinMax";
+import { getMinMaxPrice } from "../features/catalog/utils/getMinMaxPrice";
 import { sortProducts } from "../features/catalog/hooks/useSortProducts";
 import ProductsList from "../features/products/ProductsList";
 
 export default function CatalogPage(factory: () => T, deps: React.DependencyList) {
-	const productsByCategory = useCategoryFilter();
-	const {minPrice, maxPrice} = priceMinMax(productsByCategory);
+	const productsByCategory = useProductsByCategory();
+	const {minPrice, maxPrice} = getMinMaxPrice(productsByCategory);
 
 	const [appliedSort, setAppliedSort] = useState('hot');
 	const [displayed, setDisplayed] = useState(productsByCategory);
