@@ -12,7 +12,7 @@ export default function Sort({ appliedSort, handleApplySort }) {
     ]
 
     return (
-        <div className="relative">
+        <div className="relative z-40">
             <button onClick={() => setShowSortMenu(!showSortMenu)}>Сортировка</button>
             <ul className={`${showSortMenu ? "block" : "hidden"} absolute bg-white w-60 p-3 right-0`}>
                 {sortName.map((el, i) =>
