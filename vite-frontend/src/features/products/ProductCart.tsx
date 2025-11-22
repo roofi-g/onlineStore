@@ -1,18 +1,23 @@
 import Cart from "../../assets/icons/cart.svg";
-import {discount} from "../catalog/utils/discount";
+import { useProductsByCategory } from "../catalog/hooks/useProductsByCategory";
+import { getUniqueOrderSizes } from "../catalog/utils/getUniqueOrderSizes";
+import { useAddToCartMutation } from "./cartApi"
+import {calcDiscount} from "../catalog/utils/calcDiscount";
 import {useState} from "react";
-import useSortSizes from "../catalog/hooks/useSortSizes";
-import {useDispatch} from "react-redux";
-import { addToCart } from "./productsSlice"
 
 export default function ProductCart({ elem }) {
-  const [show, setShow] = useState(false);
-  const sizes = useSortSizes();
-  const dispatch = useDispatch();
+  const products = useProductsByCategory();
+  const allSizes = getUniqueOrderSizes(products);
+  const normalizedProduct = elem.sizes.map(s => s.toUpperCase());
+  const displayedSizes = allSizes.filter(size =>
+      normalizedProduct.includes(size)
+  );
 
-  function handleAddToCart(size) {
-    dispatch(addToCart(elem));
-    localStorage.setItem('cart', JSON.stringify(elem));
+  const [addToCar] = useAddToCartMutation();
+  const [show, setShow] = useState(false);
+
+  function handleAddToCart(elem, size) {
+    addToCar({ ...elem, size });
   }
 
   return (
@@ -21,22 +26,27 @@ export default function ProductCart({ elem }) {
           <img className="w-full h-full object-cover" src={elem.image} alt="product-img"/>
           <div className="absolute bottom-3 w-full px-2">
             {!show ? (
-                <button onClick={() => setShow(true)} className="flex items-center justify-center w-9 h-9 rounded-full bg-white/40 hover:bg-white/80">
-                  <img className="w-4 h-4 object-contain" src={Cart} alt="корзина"/>
-                </button>
+              <button
+                onMouseEnter={() => setShow(true)}
+                className="flex items-center justify-center w-9 h-9 rounded-full bg-white/40 hover:bg-white/80"
+              >
+                <img className="w-4 h-4 object-contain" src={Cart} alt="корзина"/>
+              </button>
             ) : (
-                <div className="py-1 bg-white/80">
-                  <p className="text-sm text-center">Выберите размер</p>
-                  <div className="flex justify-center gap-2">
-                    {sizes
-                        .filter(size => elem.sizes.includes(size))
-                        .map(size =>
-                        <div key={size}>
-                          <button onClick={() => handleAddToCart(size)} className="w-6 hover:bg-white/100">{size}</button>
-                        </div>
+              <div
+                className="py-1 bg-white/80"
+                onMouseLeave={() => setShow(false)}
+              >
+                <p className="text-sm text-center">Выберите размер</p>
+                <div className="flex justify-center gap-2">
+                  {displayedSizes
+                    .map(size =>
+                      <div key={size}>
+                        <button onClick={() => handleAddToCart(elem, size)} className="pl-2 pr-2 hover:bg-white/100">{size}</button>
+                      </div>
                     )}
-                  </div>
                 </div>
+              </div>
             )}
           </div>
         </div>
@@ -46,7 +56,7 @@ export default function ProductCart({ elem }) {
             ? <p className="text-sm">
                 <span className="line-through text-zinc-500 decoration-zinc-400 mr-2">{elem.price + ' ₽'}</span>
                 {'-' + elem.discount + '%'}
-                <span className="text-rose-400 ml-2">{discount(elem.price, elem.discount) + ' ₽'}</span>
+                <span className="text-rose-400 ml-2">{calcDiscount(elem.price, elem.discount) + ' ₽'}</span>
               </p>
             : <p className="text-sm">{elem.price} ₽</p>
           }

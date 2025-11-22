@@ -47,14 +47,14 @@ Frontend ожидает, что сервер запущен на:
 ```json
    {
       "products": [
-        { "id": 101, "name": "Топ", "price": 5000, "discount": 25, "image": "/images/top.jpeg", "category_id": [1, 11], "create_at": "2025-10-09", "sizes": ["L"], "isHot": false},
-        { "id": 102, "name": "Брюки", "price": 7000, "discount": 15, "image": "/images/trousers.png", "category_id": [1, 13], "create_at": "2025-10-10", "sizes": ["M", "L"], "isHot": true }
+        { "id": 101, "name": "Топ", "price": 5000, "calcDiscount": 25, "image": "/images/top.jpeg", "category_id": [1, 11], "create_at": "2025-10-09", "sizes": ["L"], "isHot": false},
+        { "id": 102, "name": "Брюки", "price": 7000, "calcDiscount": 15, "image": "/images/trousers.png", "category_id": [1, 13], "create_at": "2025-10-10", "sizes": ["M", "L"], "isHot": true }
       ],
       "catalog": [
         { "id": 1, "name": "Одежда", "parentId": null },
         { "id": 2, "name": "Обувь", "parentId": null }
       ],
-      "cart": [],
+      "cart": []
     }
  ```
 ## Структура проекта

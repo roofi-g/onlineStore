@@ -20,7 +20,7 @@ export default function Filter({ minPrice, maxPrice, onChange, productsLength, o
     return (
         <div>
             <button onClick={() => setShowFilterMenu(!showFilterMenu)}>Фильтры</button>
-            <div className={`${showFilterMenu ? "block" : "hidden"} absolute bg-white w-90 p-5 left-10 border flex flex-col`}>
+            <div className={`${showFilterMenu ? "block" : "hidden"} absolute bg-white w-90 p-5 left-10 border flex flex-col z-40`}>
                 <div>
                     <h4 className="font-semibold tracking-wider">Размер</h4>
                     <SortSizes

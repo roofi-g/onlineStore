@@ -1,8 +1,7 @@
 import { useGetProductsQuery } from "../features/products/productsApi";
-import Header from "../components/header/Header";
-import Footer from "../components/Footer";
+import ProductCart from "../features/products/ProductCart";
 
-export default function Home() {
+export default function HomePage() {
     const { data: products = [], isLoading, error } = useGetProductsQuery();
 
     if (isLoading) return <p>Loading...</p>
@@ -11,8 +10,6 @@ export default function Home() {
 
     return (
         <>
-            <Header />
-
             <section
                 className="h-[750px] w-full bg-cover relative left-1/2 right-1/2 -mx-[50vw] w-screen"
                 style={{ backgroundImage: "url('../../public/banner-2.jpg')" }}
@@ -23,6 +20,11 @@ export default function Home() {
                     <p>Product</p>
                     <a href="#">Смотреть всё</a>
                 </div>
+                {/*<div className="flex flex-wrap justify-around">*/}
+                {/*    {products.map(product => (*/}
+                {/*        <ProductCart elem={product}/>*/}
+                {/*    ))}*/}
+                {/*</div>*/}
                 <div className="flex flex-wrap justify-around">
                     {products.map(el => (
                         <div key={el.id}>
@@ -32,10 +34,6 @@ export default function Home() {
                     ))}
                 </div>
             </section>
-
-            <h1 className="text-center text-2xl">Home</h1>
-
-            {/*<Footer />*/}
         </>
     )
 }

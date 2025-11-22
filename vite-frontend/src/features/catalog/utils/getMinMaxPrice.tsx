@@ -1,4 +1,4 @@
-export function priceMinMax(products) {
+export function getMinMaxPrice(products) {
     const minPrice = products.length
         ? Math.min(...products.map(p => p.price))
         : 1;

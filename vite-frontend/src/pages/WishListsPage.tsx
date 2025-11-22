@@ -1,9 +1,6 @@
-import Header from "../components/header/Header";
-
-export default function Favorite() {
+export default function WishListsPage() {
     return (
         <>
-            <Header/>
             <h1>Favorite</h1>
         </>
     )

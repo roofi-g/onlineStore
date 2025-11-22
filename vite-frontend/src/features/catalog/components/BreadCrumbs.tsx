@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import {useActiveCategory} from "../hooks/useActiveCategory";
+import { useActiveCategory } from "../hooks/useActiveCategory";
 
 export default function BreadCrumbs() {
     const { parentCategory, childCategory } = useActiveCategory();
@@ -11,9 +11,9 @@ export default function BreadCrumbs() {
     ].filter(Boolean);
 
     return (
-        <nav className="flex">
+        <nav className="flex gap-2 text-zinc-400">
             {crumbs.map((crumb, i) => (
-                <Link key={i} to={crumb.path}>{crumb.name}</Link>
+                <Link key={i} className="hover:text-zinc-600 " to={crumb.path}>{crumb.name}</Link>
             ))}
         </nav>
     )
