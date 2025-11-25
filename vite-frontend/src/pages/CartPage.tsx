@@ -6,13 +6,19 @@ export default function CartPage() {
   if (isLoading) return <p>Загрузка...</p>;
 
   return (
-      <div className="flex justify-between mt-5 gap-10">
+      <div className="flex justify-between mt-5 gap-12 mx-15">
         <div className="w-2/3">
-          <h2 className="mb-5 text-xl font-medium">Корзина</h2>
-          <p className="text-sm"><span className="mr-1">{items.length}</span>товара</p>
+          <div className="flex gap-3 items-center mb-6 mb-2 font-medium uppercase">
+            <h2 className="text-xl font-medium uppercase">Корзина:</h2>
+            <p className="text-sl text-center"><span className="mr-1">{items.length}</span>товара</p>
+          </div>
           {items.map(product => (
-              <div key={product.id} className="flex justify-between py-5 mx-8 border-t-2 border-zinc-100">
-                <div>
+              <div key={product.id} className="flex justify-between py-5 border-t-2 border-zinc-100">
+                <div className="flex items-center">
+                  <input className="mx-4 p-2 w-3 h-3
+                  appearance-none border border-zinc-400 rounded
+                  checked:[background-image:url('./assets/icons/check.svg')]
+                  bg-size-[10px] bg-center bg-no-repeat" type="checkbox"/>
                   <img className="w-30" src={product.image} alt="img"/>
                 </div>
                 <div className="flex min-w-0 flex-1 flex-col justify-between ml-5">
@@ -56,7 +62,22 @@ export default function CartPage() {
           ))}
         </div>
         <div className="w-1/3">
-          <h2 className="text-xl font-medium">Ваш заказ</h2>
+          <h2 className="mb-6 text-xl font-medium uppercase">Ваш заказ</h2>
+          <div className="border-1 border-zinc-300 p-5">
+            <div className="flex justify-between text-sm mb-3">
+              <p>Товары <span>({items.length})</span></p>
+              <p>25 996 ₽</p>
+            </div>
+            <div className="flex justify-between text-sm mb-3">
+              <p>Скидка</p>
+              <p>-5 996 ₽</p>
+            </div>
+            <div className="flex justify-between text-xm  uppercase">
+              <p>к оплате</p>
+              <p>-20 000 ₽</p>
+            </div>
+            <button className="w-full uppercase border-2 border-zinc-200 bg-zinc-100 p-2 mt-4 hover:bg-zinc-200">Оформить заказ</button>
+          </div>
         </div>
       </div>
   )
