@@ -317,116 +317,11 @@
   ],
   "cart": [
     {
-      "id": "112",
-      "name": "Платье",
-      "price": 4000,
-      "image": "/images/dress.jpg",
-      "category_id": [
-        1,
-        14
-      ],
-      "create_at": "2025-11-08",
-      "sizes": [
-        "S",
-        "M",
-        "L"
-      ],
-      "isHot": true,
-      "size": "S",
-      "quantity": 1
-    },
-    {
-      "id": "109",
-      "name": "Брюки",
-      "price": 4000,
-      "image": "/images/trousers.png",
-      "category_id": [
-        1,
-        13
-      ],
-      "create_at": "2025-11-08",
-      "sizes": [
-        "S",
-        "M",
-        "L"
-      ],
-      "isHot": true,
-      "size": "M",
-      "quantity": 1
-    },
-    {
       "id": "104",
       "name": "Свитер",
       "price": 3000,
-      "discount": 25,
       "image": "/images/sweater.png",
-      "category_id": [
-        1,
-        12
-      ],
-      "create_at": "2025-10-12",
-      "sizes": [
-        "M",
-        "L"
-      ],
-      "isHot": false,
       "size": "M",
-      "quantity": 1
-    },
-    {
-      "id": "115",
-      "name": "Туфли",
-      "price": 9000,
-      "image": "/images/shoes.jpg",
-      "category_id": [
-        2,
-        21
-      ],
-      "create_at": "2025-10-01",
-      "sizes": [
-        36,
-        37,
-        38,
-        39,
-        40
-      ],
-      "isHot": true,
-      "size": 38,
-      "quantity": 1
-    },
-    {
-      "id": "105",
-      "name": "Платье",
-      "price": 9000,
-      "discount": 20,
-      "image": "/images/dress.jpg",
-      "category_id": [
-        1,
-        14
-      ],
-      "create_at": "2025-10-09",
-      "sizes": [
-        "S"
-      ],
-      "isHot": true,
-      "size": "S",
-      "quantity": 1
-    },
-    {
-      "id": "106",
-      "name": "Сумка",
-      "price": 6000,
-      "discount": 30,
-      "image": "/images/bag.jpg",
-      "category_id": [
-        3
-      ],
-      "create_at": "2025-10-20",
-      "sizes": [
-        "one size"
-      ],
-      "isHot": true,
-      "size": "ONE SIZE",
       "quantity": 1
     }
   ],
