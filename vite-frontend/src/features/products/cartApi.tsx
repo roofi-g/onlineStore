@@ -10,19 +10,10 @@ export const cartApi = createApi({
       providesTags: ['Cart'],
     }),
     addToCart: builder.mutation({
-      query: (product) => ({
+      query: (newItem) => ({
         url: 'cart',
         method: 'POST',
-        // body: { ...product, quantity: 1 },
-        body: {
-          id: product.id,
-          name: product.name,
-          price: product.price,
-          image: product.image,
-          size: product.size,
-          discount: product.discount,
-          quantity: 1
-        },
+        body: newItem
       }),
       invalidatesTags: ['Cart'],
     }),

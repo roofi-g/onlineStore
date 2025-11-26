@@ -1,7 +1,7 @@
 import Cart from "../../assets/icons/cart.svg";
 import { useProductsByCategory } from "../catalog/hooks/useProductsByCategory";
 import { getUniqueOrderSizes } from "../catalog/utils/getUniqueOrderSizes";
-import { useAddToCartMutation } from "./cartApi"
+import {useAddToCartMutation, useGetCartQuery} from "./cartApi"
 import {calcDiscount} from "../catalog/utils/calcDiscount";
 import {useState} from "react";
 
@@ -14,10 +14,18 @@ export default function ProductCart({ elem }) {
   );
 
   const [addToCar] = useAddToCartMutation();
+  const { data: cart = [] } = useGetCartQuery();
   const [show, setShow] = useState(false);
 
-  function handleAddToCart(elem, size) {
-    addToCar({ ...elem, size });
+  const cartItem = cart.filter(item => item.selectProductId === elem.id);
+  const cartSizes = cartItem.map(item => item.size);
+
+  function handleAddToCart(selectProductId, size) {
+    const existing = cart.find(item => item.selectProductId === selectProductId && item.size === size);
+
+    if (!existing) {
+      addToCar({ id: String(Date.now()), selectProductId, size, quantity: 1 });
+    }
   }
 
   return (
@@ -42,7 +50,10 @@ export default function ProductCart({ elem }) {
                   {displayedSizes
                     .map(size =>
                       <div key={size}>
-                        <button onClick={() => handleAddToCart(elem, size)} className="pl-2 pr-2 hover:bg-white/100">{size}</button>
+                        <button
+                            className={`${cartSizes.includes(size) ? "bg-white/100" : "" } pl-2 pr-2 hover:bg-white/100`}
+                            onClick={() => handleAddToCart(elem.id, size)}
+                        >{size}</button>
                       </div>
                     )}
                 </div>
