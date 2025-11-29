@@ -8,7 +8,7 @@ import {useState} from "react";
 export default function ProductCart({ elem }) {
   const products = useProductsByCategory();
   const allSizes = getUniqueOrderSizes(products);
-  const normalizedProduct = elem.sizes.map(s => s.toUpperCase());
+  const normalizedProduct = elem.sizes.map(s => s.toString().toUpperCase());
   const displayedSizes = allSizes.filter(size =>
       normalizedProduct.includes(size)
   );
