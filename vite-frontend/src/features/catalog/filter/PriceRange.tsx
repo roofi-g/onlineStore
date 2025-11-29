@@ -2,7 +2,10 @@ import {Range} from "react-range";
 
 export default function PriceRange({ minPrice, maxPrice, value, onChange }) {
     const handleChange = values => onChange(values);
+
     if (minPrice == null || maxPrice == null) return <p>Загрузка..</p>
+
+    if (minPrice === maxPrice) maxPrice = minPrice + 1000
 
     return (
         <>
