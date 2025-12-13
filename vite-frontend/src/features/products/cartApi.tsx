@@ -17,6 +17,14 @@ export const cartApi = createApi({
       }),
       invalidatesTags: ['Cart'],
     }),
+    updateQuantity: builder.mutation({
+      query: (newItem) => ({
+        url: 'cart',
+        method: 'PUT',
+        body: newItem
+      }),
+      invalidatesTags: ['Cart'],
+    }),
     removeToCart: builder.mutation({
       query: (id) => ({
         url: `cart/${id}`,
