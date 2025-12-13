@@ -2,8 +2,8 @@ import Cart from "../../assets/icons/cart.svg";
 import { useProductsByCategory } from "../catalog/hooks/useProductsByCategory";
 import { getUniqueOrderSizes } from "../catalog/utils/getUniqueOrderSizes";
 import {useAddToCartMutation, useGetCartQuery} from "./cartApi"
-import {calcDiscount} from "../catalog/utils/calcDiscount";
 import {useState} from "react";
+import { PriceDisplay } from "../cart/components/PriceDisplay";
 
 export default function ProductCart({ elem }) {
   const products = useProductsByCategory();
@@ -63,14 +63,7 @@ export default function ProductCart({ elem }) {
         </div>
         <div className="p-2 mb-5">
           <p className="uppercase text-sm font-medium tracking-wide">{elem.name} {elem.id}</p>
-          {elem.discount
-            ? <p className="text-sm">
-                <span className="line-through text-zinc-500 decoration-zinc-400 mr-2">{elem.price + ' ₽'}</span>
-                {'-' + elem.discount + '%'}
-                <span className="text-rose-400 ml-2">{calcDiscount(elem.price, elem.discount) + ' ₽'}</span>
-              </p>
-            : <p className="text-sm">{elem.price} ₽</p>
-          }
+          <PriceDisplay price={elem.price} discount={elem.discount} />
           {elem.isHot && <p className="text-xs">HIT</p>}
         </div>
       </div>

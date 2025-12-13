@@ -1,5 +1,6 @@
 import {useRemoveToCartMutation, useGetCartQuery} from "../features/products/cartApi"
 import {useGetProductsQuery} from "../features/products/productsApi";
+import { PriceDisplay } from "../features/cart/components/PriceDisplay";
 
 export default function CartPage() {
   const { data: products = [] } = useGetProductsQuery();
@@ -31,12 +32,12 @@ export default function CartPage() {
                   appearance-none border border-zinc-400 rounded
                   checked:[background-image:url('./assets/icons/check.svg')]
                   bg-size-[10px] bg-center bg-no-repeat" type="checkbox"/>
-                  <img className="w-30" src={item.product.image} alt="img"/>
+                  <img className="w-30" src={item.product?.image} alt="img"/>
                 </div>
                 <div className="flex min-w-0 flex-1 flex-col justify-between ml-5">
                   <div className="flex justify-between">
                     <div>
-                      <h4>{item.product.name}</h4>
+                      <h4>{item.product?.name}</h4>
                       <p className="text-xs text-zinc-400">{item.size}</p>
                     </div>
                     <div className="flex gap-4 items-center">
@@ -63,7 +64,7 @@ export default function CartPage() {
                   <div className="flex justify-between">
                     <p className="text-xs text-zinc-400">1 шт</p>
                     <div className="flex gap-4">
-                      <p>{item.product.price}<span className="ml-1">₽</span></p>
+                      <PriceDisplay price={item.product?.price} discount={item.product?.discount} />
                       <svg className="w-5 text-zinc-400" viewBox="0 0 24 24">
                         <path d="M17.5 1.91653C16.3739 1.93405 15.2724 2.24839 14.3067 2.82781C13.341 3.40722 12.5453 4.2312 12 5.21653C11.4546 4.2312 10.6589 3.40722 9.6932 2.82781C8.7275 2.24839 7.62601 1.93405 6.49996 1.91653C4.7049 1.99453 3.01366 2.77979 1.79574 4.10077C0.577818 5.42175 -0.0677922 7.17106 -4.17093e-05 8.96653C-4.17093e-05 13.5135 4.78596 18.4795 8.79996 21.8465C9.69618 22.5997 10.8293 23.0126 12 23.0126C13.1706 23.0126 14.3037 22.5997 15.2 21.8465C19.214 18.4795 24 13.5135 24 8.96653C24.0677 7.17106 23.4221 5.42175 22.2042 4.10077C20.9863 2.77979 19.295 1.99453 17.5 1.91653ZM13.915 20.3165C13.3789 20.7679 12.7007 21.0154 12 21.0154C11.2992 21.0154 10.621 20.7679 10.085 20.3165C4.94696 16.0055 1.99996 11.8695 1.99996 8.96653C1.9316 7.70125 2.36632 6.46026 3.20932 5.51423C4.05232 4.5682 5.23519 3.99388 6.49996 3.91653C7.76472 3.99388 8.9476 4.5682 9.7906 5.51423C10.6336 6.46026 11.0683 7.70125 11 8.96653C11 9.23175 11.1053 9.4861 11.2929 9.67364C11.4804 9.86118 11.7347 9.96653 12 9.96653C12.2652 9.96653 12.5195 9.86118 12.7071 9.67364C12.8946 9.4861 13 9.23175 13 8.96653C12.9316 7.70125 13.3663 6.46026 14.2093 5.51423C15.0523 4.5682 16.2352 3.99388 17.5 3.91653C18.7647 3.99388 19.9476 4.5682 20.7906 5.51423C21.6336 6.46026 22.0683 7.70125 22 8.96653C22 11.8695 19.053 16.0055 13.915 20.3125V20.3165Z" fill="currentColor"/>
                       </svg>
