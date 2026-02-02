@@ -1,4 +1,4 @@
-import { useGetCartQuery } from "../../../../entities/cart/api/cart.api.ts";
+import { useGetCartQuery } from "../../../../entities/cart/index.ts";
 import { useGetProductsQuery } from "../../../../entities/product/index.ts";
 import type { UseCartListResult, CartProduct } from "./types.ts"
 
