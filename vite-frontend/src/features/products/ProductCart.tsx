@@ -1,7 +1,7 @@
-import Cart from "../../assets/icons/cart.svg";
+import Cart from "../../app/assets/icons/cart.svg";
 import { useProductsByCategory } from "../catalog/hooks/useProductsByCategory";
 import { getUniqueOrderSizes } from "../catalog/utils/getUniqueOrderSizes";
-import {useAddToCartMutation, useGetCartQuery} from "./cartApi"
+import {useAddToCartMutation, useGetCartQuery} from "../../entities/cart/index"
 import {useState} from "react";
 import { PriceDisplay } from "../cart/components/PriceDisplay";
 
@@ -17,14 +17,19 @@ export default function ProductCart({ elem }) {
   const { data: cart = [] } = useGetCartQuery();
   const [show, setShow] = useState(false);
 
-  const cartItem = cart.filter(item => item.selectProductId === elem.id);
+  const cartItem = cart.filter(item => item.productId === elem.id);
   const cartSizes = cartItem.map(item => item.size);
 
-  function handleAddToCart(selectProductId, size) {
-    const existing = cart.find(item => item.selectProductId === selectProductId && item.size === size);
+  function handleAddToCart(productId, size) {
+    const existing = cart.find(item => item.productId === productId && item.size === size);
 
     if (!existing) {
-      addToCar({ id: String(Date.now()), selectProductId, size, quantity: 1 });
+      addToCar({
+        id: String(Date.now()),
+        productId,
+        size,
+        quantity: 1
+      });
     }
   }
 
