@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import Account from "../../assets/icons/account.svg";
-import Cart from "../../assets/icons/cart.svg";
-import Search from "../../assets/icons/search.svg";
-import Favorite from "../../assets/icons/favorite-heart.svg";
+import Account from "../../app/assets/icons/account.svg";
+import Cart from "../../app/assets/icons/cart.svg";
+import Search from "../../app/assets/icons/search.svg";
+import Favorite from "../../app/assets/icons/favorite-heart.svg";
 
 export default function LinksIcons() {
     return (

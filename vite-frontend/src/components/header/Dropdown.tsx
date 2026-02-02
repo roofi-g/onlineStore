@@ -1,5 +1,5 @@
-import Down from "../../assets/icons/small-down.svg";
-import Up from "../../assets/icons/small-up.svg";
+import Down from "../../app/assets/icons/small-down.svg";
+import Up from "../../app/assets/icons/small-up.svg";
 import { useState } from "react";
 import DropdownMenu from "./DropdownMenu";
 
