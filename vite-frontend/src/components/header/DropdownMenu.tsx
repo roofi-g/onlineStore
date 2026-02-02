@@ -1,4 +1,4 @@
-import { useGetCatalogQuery } from "../../features/products/productsApi";
+import { useGetCatalogQuery } from "../../entities/product/index";
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import type { Catalog } from '@/types';

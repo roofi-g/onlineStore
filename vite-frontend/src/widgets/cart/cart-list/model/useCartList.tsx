@@ -1,5 +1,5 @@
 import { useGetCartQuery } from "../../../../entities/cart/api/cart.api.ts";
-import { useGetProductsQuery } from "../../../../entities/product/api/products.api.ts";
+import { useGetProductsQuery } from "../../../../entities/product/index.ts";
 import type { UseCartListResult, CartProduct } from "./types.ts"
 
 export const useCartList = (): UseCartListResult => {

@@ -1,4 +1,4 @@
-import {useGetProductsQuery} from "../../products/productsApi";
+import {useGetProductsQuery} from "../../../entities/product/index";
 import {useActiveCategory} from "./useActiveCategory";
 import type { Product } from '@/types';
 import {useMemo} from "react";

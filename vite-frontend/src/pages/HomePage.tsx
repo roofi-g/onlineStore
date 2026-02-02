@@ -1,4 +1,4 @@
-import { useGetProductsQuery } from "../features/products/productsApi";
+import { useGetProductsQuery } from "../entities/product/index";
 import ProductCart from "../features/products/ProductCart";
 
 export default function HomePage() {
