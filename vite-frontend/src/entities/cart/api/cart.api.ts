@@ -1,14 +1,18 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import type { CartItem } from '../model/types';
 
 export const cartApi = createApi({
   reducerPath: 'cartApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3005/' }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'http://localhost:3005/'
+  }),
   tagTypes: ['Cart'],
   endpoints: (builder) => ({
-    getCart: builder.query({
-      query: () => 'cart',
-      providesTags: ['Cart'],
+    getCart: builder.query<CartItem[], void>({
+      query: () => '/cart',
+      providesTags: [{ type: 'Cart', id: 'LIST' }],
     }),
+
     addToCart: builder.mutation({
       query: (newItem) => ({
         url: 'cart',
@@ -17,6 +21,7 @@ export const cartApi = createApi({
       }),
       invalidatesTags: ['Cart'],
     }),
+
     updateQuantity: builder.mutation({
       query: (newItem) => ({
         url: 'cart',
@@ -25,14 +30,15 @@ export const cartApi = createApi({
       }),
       invalidatesTags: ['Cart'],
     }),
-    removeToCart: builder.mutation({
+
+    removeFromCart: builder.mutation<void, string>({
       query: (id) => ({
-        url: `cart/${id}`,
+        url: `/cart/${id}`,
         method: 'DELETE'
       }),
-      invalidatesTags: ['Cart'],
+      invalidatesTags: [{ type: 'Cart', id: 'LIST' }],
     }),
   }),
 });
 
-export const { useGetCartQuery, useAddToCartMutation, useRemoveToCartMutation } = cartApi;
+export const { useGetCartQuery, useAddToCartMutation, useRemoveFromCartMutation } = cartApi;
