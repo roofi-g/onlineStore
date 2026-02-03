@@ -22,11 +22,11 @@ export const cartApi = createApi({
       invalidatesTags: ['Cart'],
     }),
 
-    updateQuantity: builder.mutation({
-      query: (newItem) => ({
-        url: 'cart',
-        method: 'PUT',
-        body: newItem
+    updateQuantity: builder.mutation<void, { productId: string; quantity: number; }>({
+      query: ({ productId, quantity }) => ({
+        url: `/cart/${productId}`,
+        method: 'PATCH',
+        body: { quantity }
       }),
       invalidatesTags: ['Cart'],
     }),
@@ -41,4 +41,4 @@ export const cartApi = createApi({
   }),
 });
 
-export const { useGetCartQuery, useAddToCartMutation, useRemoveFromCartMutation } = cartApi;
+export const { useGetCartQuery, useAddToCartMutation, useUpdateQuantityMutation, useRemoveFromCartMutation } = cartApi;

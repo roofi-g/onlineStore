@@ -1,7 +1,7 @@
 import { Сheckbox } from '../../../../features/cart/checkbox/ui/checkbox';
 import { PriceDisplay } from '../../../../features/cart/components/PriceDisplay';
 import { Favourites } from '../../../../features/cart/favourites/ui/Favourites';
-import { Quantity } from '../../../../features/cart/quantity/ui/Quantity';
+import { UpdateQuantity } from '../../../../features/cart/update-the-quantity/ui/UpdateQuantity';
 import { RemoveToCart } from '../../../../features/cart/remove-from-cart/ui/RemoveToCart';
 import type { CartItemCardProps } from '../model/types';
 
@@ -23,7 +23,7 @@ export const CartItemCard = ({ cartItem }: CartItemCardProps) => {
             </div>
             <div className="flex gap-4 items-center">
               <div className="flex gap-2">
-                <Quantity item={cartItem} />
+                <UpdateQuantity cartItemId={cartItem.id} cartItemQty={cartItem.quantity} />
               </div>
               <RemoveToCart cartItemId={cartItem.id} />
             </div>

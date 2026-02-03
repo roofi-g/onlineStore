@@ -317,10 +317,20 @@
   ],
   "cart": [
     {
-      "id": "104",
-      "name": "Свитер",
-      "price": 3000,
-      "image": "/images/sweater.png",
+      "id": "1770050177511",
+      "productId": "105",
+      "size": "S",
+      "quantity": 2
+    },
+    {
+      "id": "1770104411323",
+      "productId": "109",
+      "size": "S",
+      "quantity": 1
+    },
+    {
+      "id": "1770104412023",
+      "productId": "109",
       "size": "M",
       "quantity": 1
     }
