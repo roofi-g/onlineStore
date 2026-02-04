@@ -1,9 +1,18 @@
-// import { cartApi } from '../api/cart.api';
+import { createSelector } from '@reduxjs/toolkit';
+import { cartApi } from '../api/cart.api';
 
-// export const selectCartResult = cartApi.endpoints.getCart.select();
+const selectCartResult = cartApi.endpoints.getCart.select();
 
-// export const selectCartItems = (state: any) =>
-//   selectCartResult(state)?.data?.items ?? [];
+export const selectCartItems = createSelector(
+  selectCartResult,
+  cartResult => cartResult.data || []
+);
+
+export const selectTotalQuantity = createSelector(
+  selectCartItems,
+  items => items.reduce((sum, item) => sum + item.quantity, 0)
+);
+
 
 // export const selectCartTotal = (state: any) =>
 //   selectCartItems(state).reduce(

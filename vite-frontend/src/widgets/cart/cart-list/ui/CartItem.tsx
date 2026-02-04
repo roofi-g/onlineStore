@@ -30,7 +30,7 @@ export const CartItemCard = ({ cartItem }: CartItemCardProps) => {
           </div>
 
           <div className="flex justify-between">
-            <p className="text-xs text-zinc-400">1 шт</p>
+            <p className="text-xs text-zinc-400">{cartItem.quantity} шт</p>
             <div className="flex gap-4">
               <PriceDisplay price={cartItem.product?.price} discount={cartItem.product?.discount} />
               <Favourites />

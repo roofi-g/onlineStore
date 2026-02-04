@@ -8,7 +8,8 @@ export {
   useRemoveFromCartMutation
 } from './api/cart.api';
 
-// export {
-//   selectCartItems,
-//   selectCartTotal,
-// } from './model/selectors';
+export {
+  selectCartItems,
+  selectTotalQuantity,
+  // selectCartTotal,
+} from './model/selectors';
