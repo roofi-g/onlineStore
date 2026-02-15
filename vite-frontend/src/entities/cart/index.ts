@@ -11,5 +11,5 @@ export {
 export {
   selectCartItems,
   selectTotalQuantity,
-  // selectCartTotal,
+  selectItemTotalPrice,
 } from './model/selectors';

@@ -1,9 +1,9 @@
 import { Сheckbox } from '../../../../features/cart/checkbox/ui/checkbox';
-import { PriceDisplay } from '../../../../features/cart/components/PriceDisplay';
 import { Favourites } from '../../../../features/cart/favourites/ui/Favourites';
 import { UpdateQuantity } from '../../../../features/cart/update-the-quantity/ui/UpdateQuantity';
 import { RemoveToCart } from '../../../../features/cart/remove-from-cart/ui/RemoveToCart';
 import type { CartItemCardProps } from '../model/types';
+import { CartPriceDisplay } from '../../../../entities/cart/ui/CartPriceDisplay';
 
 
 export const CartItemCard = ({ cartItem }: CartItemCardProps) => {
@@ -12,7 +12,7 @@ export const CartItemCard = ({ cartItem }: CartItemCardProps) => {
       <div className="flex justify-between py-5 border-t-2 border-zinc-100">
         <div className="flex items-center">
           <Сheckbox />
-          <img className="w-30" src={cartItem.product?.image} alt="img"/>
+          <img className="w-30" src={cartItem.product?.image} alt="img" />
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col justify-between ml-5">
@@ -32,7 +32,7 @@ export const CartItemCard = ({ cartItem }: CartItemCardProps) => {
           <div className="flex justify-between">
             <p className="text-xs text-zinc-400">{cartItem.quantity} шт</p>
             <div className="flex gap-4">
-              <PriceDisplay price={cartItem.product?.price} discount={cartItem.product?.discount} />
+              <CartPriceDisplay cartItemId={cartItem.id} />
               <Favourites />
             </div>
           </div>

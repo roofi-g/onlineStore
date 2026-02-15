@@ -13,9 +13,16 @@ export const selectTotalQuantity = createSelector(
   items => items.reduce((sum, item) => sum + item.quantity, 0)
 );
 
+export const selectItemTotalPrice = (id: string) => createSelector(
+  selectCartItems,
+  (items): { price: number; discount: number; discountedPrice: number } => {
+    const item = items.find(item => item.id === id);
+    if (!item) return { price: 0, discount: 0, discountedPrice: 0}
 
-// export const selectCartTotal = (state: any) =>
-//   selectCartItems(state).reduce(
-//     (sum, item) => sum + item.product.price * item.quantity,
-//     0
-//   );
+    const price = item.price * item.quantity;
+    const discount = item.discount;
+    const discountedPrice = price - (price * ((discount) / 100));
+    
+    return { price, discount, discountedPrice };
+  }
+);
