@@ -1,5 +1,5 @@
-import { useGetProductsQuery } from "../entities/product/index";
-import ProductCart from "../features/products/ProductCart";
+import { useGetProductsQuery } from "../../entities/product/index";
+import ProductCart from "../../features/products/ProductCart";
 
 export default function HomePage() {
     const { data: products = [], isLoading, error } = useGetProductsQuery();
@@ -28,7 +28,7 @@ export default function HomePage() {
                 <div className="flex flex-wrap justify-around">
                     {products.map(el => (
                         <div key={el.id}>
-                            <img className="w-70" src={el.image} alt=""/>
+                            <img className="w-70" src={el.image} alt="" />
                             <p>{el.name}</p>
                         </div>
                     ))}

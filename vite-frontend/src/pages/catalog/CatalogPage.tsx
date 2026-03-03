@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import Filter from "../features/catalog/filter/Filter";
-import Sort from "../features/catalog/sort/Sort";
-import { useProductsByCategory } from "../features/catalog/hooks/useProductsByCategory";
-import { useFilterProducts } from "../features/catalog/hooks/useFilterProducts";
-import { getMinMaxPrice } from "../features/catalog/utils/getMinMaxPrice";
-import { sortProducts } from "../features/catalog/hooks/useSortProducts";
-import ProductsList from "../features/products/ProductsList";
+import Filter from "../../features/catalog/filter/Filter";
+import Sort from "../../features/catalog/sort/Sort";
+import { useProductsByCategory } from "../../features/catalog/hooks/useProductsByCategory";
+import { useFilterProducts } from "../../features/catalog/hooks/useFilterProducts";
+import { getMinMaxPrice } from "../../features/catalog/utils/getMinMaxPrice";
+import { sortProducts } from "../../features/catalog/hooks/useSortProducts";
+import ProductsList from "../../features/products/ProductsList";
 
 export default function CatalogPage(factory: () => T, deps: React.DependencyList) {
 	const productsByCategory = useProductsByCategory();
-	const {minPrice, maxPrice} = getMinMaxPrice(productsByCategory);
+	const { minPrice, maxPrice } = getMinMaxPrice(productsByCategory);
 
 	const [appliedSort, setAppliedSort] = useState('hot');
 	const [displayed, setDisplayed] = useState(productsByCategory);
@@ -28,7 +28,7 @@ export default function CatalogPage(factory: () => T, deps: React.DependencyList
 	}, [productsByCategory, isFiltered]);
 
 	const handleFilterChange = newFilters => {
-		setFilters(prev => ({...prev, ...newFilters}))
+		setFilters(prev => ({ ...prev, ...newFilters }))
 	};
 
 	const handleApplyFilters = () => {
@@ -53,9 +53,9 @@ export default function CatalogPage(factory: () => T, deps: React.DependencyList
 					onApply={handleApplyFilters}
 				/>
 				<p>{displayed.length} товаров</p>
-				<Sort appliedSort={appliedSort} handleApplySort={handleApplySort}/>
+				<Sort appliedSort={appliedSort} handleApplySort={handleApplySort} />
 			</div>
-			<ProductsList displayed={displayed}/>
+			<ProductsList displayed={displayed} />
 		</div>
 	)
 }

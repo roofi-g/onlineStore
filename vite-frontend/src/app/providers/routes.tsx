@@ -1,12 +1,12 @@
 import MainLayout from "../../components/MainLayout";
-import HomePage from "../../pages/HomePage";
+import HomePage from "../../pages/home/HomePage";
 import CartPage from "../../pages/cart/CartPage";
-import WishListsPage from "../../pages/WishListsPage";
-import AccountPage from "../../pages/AccountPage";
+import WishListsPage from "../../pages/favorites/WishListsPage";
+import AccountPage from "../../pages/profile/ProfilePage";
 import CatalogLayout from "../../features/catalog/CatalogLayout";
-import CatalogPage from "../../pages/CatalogPage";
-import ProductPage from "../../pages/ProductPage";
-import NotFoundPage from "../../pages/NotFoundPage";
+import CatalogPage from "../../pages/catalog/CatalogPage";
+import ProductPage from "../../pages/product/ProductPage";
+import NotFoundPage from "../../pages/not-found/NotFoundPage";
 
 export const routes = [
     {
