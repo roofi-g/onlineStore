@@ -1,4 +1,4 @@
-import MainLayout from "../../components/MainLayout";
+import MainLayout from "../layouts/MainLayout";
 import HomePage from "../../pages/home/HomePage";
 import CartPage from "../../pages/cart/CartPage";
 import WishListsPage from "../../pages/favorites/WishListsPage";
