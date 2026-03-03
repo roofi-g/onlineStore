@@ -317,18 +317,15 @@
   ],
   "cart": [
     {
-      "id": "1770050177511",
+      "id": "1771348077554",
       "productId": "105",
       "size": "S",
-      "quantity": 1
-    },
-    {
-      "id": "1770104412023",
-      "productId": "109",
-      "size": "M",
+      "price": 9000,
+      "discount": 20,
       "quantity": 1
     }
   ],
   "wishlists": [],
-  "orders": []
+  "orders": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }
