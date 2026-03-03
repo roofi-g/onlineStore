@@ -6,3 +6,8 @@ export interface CartItem {
   discount: number,
   quantity: number;
 }
+
+export interface CartState {
+  items: CartItem[];
+  totalPrice: number;
+}

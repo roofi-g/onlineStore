@@ -1,5 +1,9 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { cartApi } from '../api/cart.api';
+import { selectSelectedCartItems } from '../../../features/cart/select-cart-items/model/selectors';
+import { calculateCartTotals } from '../lib/calculateCartTotals';
+import { calculateItemTotals } from '../lib/calculateItemTotals';
+import type { RootState } from '../../../app/store/store';
 
 const selectCartResult = cartApi.endpoints.getCart.select();
 
@@ -13,16 +17,19 @@ export const selectTotalQuantity = createSelector(
   items => items.reduce((sum, item) => sum + item.quantity, 0)
 );
 
-export const selectItemTotalPrice = (id: string) => createSelector(
-  selectCartItems,
-  (items): { price: number; discount: number; discountedPrice: number } => {
+export const selectItemTotalPrice = createSelector(
+  [selectCartItems, (_: RootState, id: string) => id],
+  (items, id) => {
     const item = items.find(item => item.id === id);
-    if (!item) return { price: 0, discount: 0, discountedPrice: 0}
+    if (!item) return null;
 
-    const price = item.price * item.quantity;
-    const discount = item.discount;
-    const discountedPrice = price - (price * ((discount) / 100));
-    
-    return { price, discount, discountedPrice };
+    return calculateItemTotals(item);
+  }
+);
+
+export const selectSelectedTotals = createSelector(
+  selectSelectedCartItems,
+  (selectedItems) => {
+    return calculateCartTotals(selectedItems);
   }
 );

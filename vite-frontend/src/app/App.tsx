@@ -1,6 +1,6 @@
 import './providers/theme.css'
 import { Provider } from "react-redux";
-import { store } from "./providers/store";
+import { store } from "./store/store";
 import { useRoutes } from "react-router-dom";
 import { routes } from "./providers/routes";
 
