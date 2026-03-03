@@ -1,4 +1,4 @@
-import { Сheckbox } from '../../../../features/cart/checkbox/ui/checkbox';
+import { ItemCheckbox } from '../../../../features/cart/select-cart-items/ui/ItemCheckbox';
 import { Favourites } from '../../../../features/cart/favourites/ui/Favourites';
 import { UpdateQuantity } from '../../../../features/cart/update-the-quantity/ui/UpdateQuantity';
 import { RemoveToCart } from '../../../../features/cart/remove-from-cart/ui/RemoveToCart';
@@ -11,7 +11,7 @@ export const CartItemCard = ({ cartItem }: CartItemCardProps) => {
     <>
       <div className="flex justify-between py-5 border-t-2 border-zinc-100">
         <div className="flex items-center">
-          <Сheckbox />
+          <ItemCheckbox cartItemId={cartItem.id} />
           <img className="w-30" src={cartItem.product?.image} alt="img" />
         </div>
 
