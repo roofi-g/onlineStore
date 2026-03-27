@@ -1,4 +1,4 @@
-import Check from "../../../app/assets/icons/check.svg";
+import Check from "../../../../app/assets/icons/check.svg";
 import {useState} from "react";
 
 export default function Sort({ appliedSort, handleApplySort }) {

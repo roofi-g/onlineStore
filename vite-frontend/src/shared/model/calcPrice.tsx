@@ -1,6 +1,3 @@
-export function calcPrice(price, discount) {
-  const discountedPrice = price - (price / 100) * discount;
-    return {
-      discountedPrice,
-    }
+export function calcPrice(price: number, discount: number): number {
+  return price - (price / 100) * discount;
 }

@@ -1,59 +1,83 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
-import Filter from "../../features/catalog/filter/Filter";
-import Sort from "../../features/catalog/sort/Sort";
-import { useProductsByCategory } from "../../features/catalog/hooks/useProductsByCategory";
-import { useFilterProducts } from "../../features/catalog/hooks/useFilterProducts";
-import { getMinMaxPrice } from "../../features/catalog/utils/getMinMaxPrice";
-import { sortProducts } from "../../features/catalog/hooks/useSortProducts";
-import ProductsList from "../../features/products/ProductsList";
+import { useEffect, useMemo, useState } from "react";
+import Filter from "../../widgets/catalog/ui/Filter";
+import Sort from "../../features/catalog/sort/ui/Sort";
+import { useProductsByCategory } from "../../entities/catalog/model/useProductsByCategory";
+import { useFilterProducts } from "../../features/catalog/filter/model/useFilterProducts";
+import { sortProducts } from "../../features/catalog/sort/model/useSortProducts";
+import ProductsList from "../../entities/product/ui/ProductsList";
+import { getMinMaxPrice } from "../../shared/model/getMinMaxPrice";
+import { getUniqueSizes } from "../../shared/model/getUniqueSizes";
 
-export default function CatalogPage(factory: () => T, deps: React.DependencyList) {
-	const productsByCategory = useProductsByCategory();
-	const { minPrice, maxPrice } = getMinMaxPrice(productsByCategory);
+export default function CatalogPage() {
+	const products = useProductsByCategory();
 
-	const [appliedSort, setAppliedSort] = useState('hot');
-	const [displayed, setDisplayed] = useState(productsByCategory);
-	const [isFiltered, setIsFiltered] = useState(false);
-	const [filters, setFilters] = useState({
+	const [draftFilters, setDraftFilters] = useState({
 		sizes: [],
-		price: [0, 0],
+		price: null as [number, number] | null
 	})
 
-	const filteredProducts = useFilterProducts(productsByCategory, filters);
+	const [appliedFilters, setAppliedFilters] = useState({
+		sizes: [],
+		price: null as [number, number] | null
+	})
+
+	const [sort, setSort] = useState('hot');
+
+	const { minPrice, maxPrice } = useMemo(
+		() => getMinMaxPrice(products),
+		[products]
+	);
+
+	const sizes = useMemo(
+		() => getUniqueSizes(products),
+		[products]
+	);  
 
 	useEffect(() => {
-		if (!isFiltered)
-			setDisplayed(sortProducts(productsByCategory, appliedSort));
-	}, [productsByCategory, isFiltered]);
+		if (minPrice && maxPrice) {
 
-	const handleFilterChange = newFilters => {
-		setFilters(prev => ({ ...prev, ...newFilters }))
-	};
+			const range: [number, number] = [minPrice, maxPrice]
+
+			setDraftFilters({
+				sizes: [],
+				price: range
+			})
+
+			setAppliedFilters({
+				sizes: [],
+				price: range
+			})
+		}
+
+	}, [minPrice, maxPrice])
+
+	const filteredProducts = useFilterProducts(products, appliedFilters);
+
+	const displayed = useMemo(
+		() => sortProducts(filteredProducts, sort),
+		[filteredProducts, sort]
+	);
 
 	const handleApplyFilters = () => {
-		const sorted = sortProducts(filteredProducts, appliedSort)
-		setDisplayed(sorted);
-		setIsFiltered(true);
-	}
-
-	const handleApplySort = (type) => {
-		setAppliedSort(type);
-		setDisplayed(sortProducts(displayed, type));
+		setAppliedFilters(draftFilters)
 	}
 
 	return (
 		<div>
 			<div className="flex justify-between mt-5 mb-5">
 				<Filter
+					filters={draftFilters}
+					setFilters={setDraftFilters}
+					sizes={sizes}
 					minPrice={minPrice}
 					maxPrice={maxPrice}
-					onChange={handleFilterChange}
 					productsLength={filteredProducts.length}
 					onApply={handleApplyFilters}
 				/>
 				<p>{displayed.length} товаров</p>
-				<Sort appliedSort={appliedSort} handleApplySort={handleApplySort} />
+				<Sort
+					appliedSort={sort}
+					handleApplySort={setSort} />
 			</div>
 			<ProductsList displayed={displayed} />
 		</div>

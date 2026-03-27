@@ -1,11 +1,15 @@
 import {Range} from "react-range";
 
-export default function PriceRange({ minPrice, maxPrice, value, onChange }) {
-    const handleChange = values => onChange(values);
+interface PriceRangeProps {
+    minPrice: number
+    maxPrice: number
+    value: [number, number]
+    onChange: (value: [number, number]) => void
+}
 
-    if (minPrice == null || maxPrice == null) return <p>Загрузка..</p>
-
-    if (minPrice === maxPrice) maxPrice = minPrice + 1000
+export default function PriceRange({ minPrice, maxPrice, value, onChange }: PriceRangeProps) {
+    
+    const safeMaxPrice = minPrice === maxPrice ? minPrice + 1000 : maxPrice;
 
     return (
         <>
@@ -15,9 +19,9 @@ export default function PriceRange({ minPrice, maxPrice, value, onChange }) {
             </div>
             <Range
                 min={minPrice}
-                max={maxPrice}
+                max={safeMaxPrice}
                 values={value}
-                onChange={handleChange}
+                onChange={onChange}
                 renderTrack={({ props, children }) => (
                     <div
                         {...props}
@@ -26,8 +30,8 @@ export default function PriceRange({ minPrice, maxPrice, value, onChange }) {
                         <div
                             className="absolute h-1 bg-rose-200 rounded-full"
                             style={{
-                                left: `${((value[0] - minPrice) / (maxPrice - minPrice)) * 100}%`,
-                                width: `${((value[1] - value[0]) / (maxPrice - minPrice)) * 100}%`,
+                                left: `${((value[0] - minPrice) / (safeMaxPrice - minPrice)) * 100}%`,
+                                width: `${((value[1] - value[0]) / (safeMaxPrice - minPrice)) * 100}%`,
                             }}
                         />
                         {children}

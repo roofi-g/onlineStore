@@ -1,5 +1,5 @@
 export interface Catalog {
-    id: number | string;
+    id: string;
     name: string;
     slug: string;
     parentId: number | null;
