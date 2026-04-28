@@ -9,7 +9,7 @@ interface PriceRangeProps {
 
 export default function PriceRange({ minPrice, maxPrice, value, onChange }: PriceRangeProps) {
     
-    const safeMaxPrice = minPrice === maxPrice ? minPrice + 1000 : maxPrice;
+    const safeMaxPrice = minPrice === maxPrice ? maxPrice + 1000 : maxPrice;
 
     return (
         <>
