@@ -5,7 +5,7 @@ export function getMinMaxPrice(products: Product[]): {
     maxPrice: number
 } {
     if (!products.length) {
-        return { minPrice: 1, maxPrice: 100 };
+        return { minPrice: 1, maxPrice: 100000 };
     }
 
     let minPrice = Infinity;
