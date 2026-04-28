@@ -1,7 +1,6 @@
 export type { Product } from './model/types';
 
-export { productsApi } from './api/products.api';
+export { productsApi } from './model/products.api';
 export {
   useGetProductsQuery,
-  useGetCatalogQuery,
-} from './api/products.api';
+} from './model/products.api';
