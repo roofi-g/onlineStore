@@ -6,7 +6,7 @@ type Crumb = {
 }
 
 export function useBreadCrumbs(): Crumb[] {
-    const { parentCategory, childCategory } = useActiveCategory();
+    const { parentCategory, childCategory, productId } = useActiveCategory();
 
     return [
         { name: 'Главная', path: '/' },
@@ -19,6 +19,11 @@ export function useBreadCrumbs(): Crumb[] {
         ...(childCategory ? [{
             name: childCategory.name,
             path: `/catalog/${parentCategory!.slug}/${childCategory.slug}`
+        }] : []),
+
+        ...(productId ? [{
+            name: productId.name,
+            path: `/catalog/${parentCategory}/${childCategory}/${productId}`
         }] : []),
     ];
 }

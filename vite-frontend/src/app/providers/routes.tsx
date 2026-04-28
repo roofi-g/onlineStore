@@ -3,7 +3,7 @@ import HomePage from "../../pages/home/HomePage";
 import CartPage from "../../pages/cart/CartPage";
 import WishListsPage from "../../pages/favorites/WishListsPage";
 import AccountPage from "../../pages/profile/ProfilePage";
-import CatalogLayout from "../../features/catalog/CatalogLayout";
+import CatalogLayout from "../../entities/catalog/ui/CatalogLayout";
 import CatalogPage from "../../pages/catalog/CatalogPage";
 import ProductPage from "../../pages/product/ProductPage";
 import NotFoundPage from "../../pages/not-found/NotFoundPage";
@@ -24,6 +24,7 @@ export const routes = [
                     { index: true, element: <CatalogPage /> },
                     { path: ':categorySlug', element: <CatalogPage /> },
                     { path: ':categorySlug/:subCategorySlug', element: <CatalogPage /> },
+                    { path: ':categorySlug/:productId', element: <ProductPage /> },
                     { path: ':categorySlug/:subCategorySlug/:productId', element: <ProductPage /> },
                 ]
             }
