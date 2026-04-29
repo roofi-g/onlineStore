@@ -6,17 +6,23 @@
 
 - Просмотр каталога товаров
 - Фильтрация и сортировка
+- Добавление и удаление товара из корзины
+- Динамическое обновление цен при изменении количества товаров
+- Сохранение значения фильтрации и сортировки при обновлении страницы
+
+## Особенности
+
 - Хранение состояния через Redux
 - Локальный сервер данных через json-server
 
 ## Технологии
 
-- React
-- Redux Toolkit
-- TypeScript
-- json-server
-- Tailwind
-- Vite
+- Язык программирования: TypeScript
+- Библиотека: React
+- State-management: Redux Toolkit / RTK Query
+- Сервер: json-server
+- Стили: Tailwind
+- Сборщик проекта: Vite
 
 ## Установка и запуск
 
@@ -52,34 +58,68 @@ Frontend ожидает, что сервер запущен на:
       ],
       "catalog": [
         { "id": 1, "name": "Одежда", "parentId": null },
-        { "id": 2, "name": "Обувь", "parentId": null }
+        { "id": 13, "name": "Брюки", "parentId": 1 }
       ],
-      "cart": []
+      "cart": [
+         {
+            "id": "3lqJXTZ9_TI",
+            "productId": "104",
+            "size": "M",
+            "price": 3000,
+            "discount": 25,
+            "quantity": 1
+         },
+      ]
     }
  ```
-## Структура проекта
+## Структура проекта по архитектуре FSD (Feature-Sliced-Design)
 
   ```
 server/                    
 ├── db.json       
+|
 vite-frontend/
 ├── src/
-│   ├── components/              
-│   │   └── header/
+│   ├── app/     
+│   │   ├── providers/
+│   │   ├── store/         
+│   │   └── main.tsx
+|   |
+│   ├── entities/
+│   │   ├── cart
+│   │   │   ├── api/    
+│   │   │   ├── lib/          
+│   │   │   ├── model/
+│   │   │   ├── ui/
+│   │   │   └── index.ts
+│   │   ├── catalog
+│   │   └── product
+|   |
 │   ├── features/
 │   │   ├── catalog
-│   │   │   ├── components/    
-│   │   │   ├── filter/          
-│   │   │   ├── hooks/
-│   │   │   ├── sort/
-│   │   │   └── utils/
-│   │   └── products
+│   │   │   ├── filter/    
+│   │   │   ├── pagination/          
+│   │   │   ├── search/
+│   │   │   └── sort/
+│   │   └── cart
+|   |
 │   ├── pages/
-│   ├── routes/
-│   ├── store/
-│   └── types/
+│   │   ├── home
+│   │   │   └── HomePage.ts
+│   │   ├── cart
+│   │   └── catalog
+|   |
+│   ├── shared/
+│   │   ├── model/       
+│   │   └── ui/
+|   |
+│   └── widgets/
+│   │   ├── cart/  
+│   │   ├── header/       
+│   │   └── footer/
+|   |
 ├── public/
-│   ├── images/
+│   └── images/
 ├── package.json
 ├── README.md
 └── .gitignore
